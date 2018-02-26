@@ -14,6 +14,7 @@
 		color: #c6d4df;
 		font-size: 12px;
 	}
+	.detailPage{background-image: none;}
 	.clear{clear:both;}
 	.responsive{position: relative;}
 	.global_header{
@@ -50,7 +51,7 @@
 		padding: 10px 5px 3px 5px;
 	}
 	.content a{
-		color: #b8b6b4;
+		color: #e5e4dc;
 	}
 	.content a:hover{
 		color: #fff;
@@ -89,8 +90,6 @@
 	}
 	.global_actions{
 		float: right;
-		display: inline-block;
-		width: 210px;
 		padding-top: 3px;
 		font-size: 11px;
 	}
@@ -178,6 +177,11 @@
 		font-size: 14px;
 	}
 	.store.move{margin-bottom: 18px;}
+	.store.nav{
+		position: absolute;
+		top: 0;
+		width: 940px;
+	}
 	.store li{
 		position: relative;
 		float: left;
@@ -340,13 +344,6 @@
 		display: block;
 		background-image: url(img/arrows.png);
 	}
-	.box{
-		position: relative;
-		left: -50px;
-		width: 940px;
-		padding: 0 50px;
-		height: 420px;
-	}
 	.left{
 		left: -46px;
 		background: linear-gradient(to right,rgba(0,0,0,.3)5%,rgba(0,0,0,0)95%) ;
@@ -374,12 +371,7 @@
 		box-shadow: none;
 	}
 	.scheme{
-		position: absolute;
-		top: 0;
-		left: 0px;
 		display: none;
-		width: 940px;
-		height: 353px;
 	}
 	.contentImg{
 		float: left;
@@ -708,7 +700,6 @@
 		font-weight: normal;
 		position: relative;
 		min-height: 342px;
-		display: none;
 	}
 	.profile{
 		display: flex;
@@ -944,11 +935,12 @@
 	}
 	.tab_see_more a:hover{border: 1px solid rgba(255,255,255,1);}
 	#chart4>span{top: 15px;}
-	.cheap{display: none;}
+	.cheap{overflow: hidden;}
 	.cheap a{
-		display: inline-block;
+		display: block;
+		float: left;
 		width: 229px;
-		margin-left: 5px;
+		margin-left: 8px;
 		box-shadow: 0 0 5px #000;
 		background:linear-gradient( -45deg, rgba(64,121,153,1) 5%,rgba(42,62,89,1) 95%);
 	}
@@ -1120,7 +1112,7 @@
 		padding-top: 10px;
 		height: 33px;
 	}
-	.btn_ctn button{
+	button{
 		display: inline-block;
 		cursor: pointer;
 		color: #67c1f5;
@@ -1131,7 +1123,7 @@
 		font-size: 15px;
 		line-height: 30px;
 	}
-	.btn_ctn button:hover{
+	button:hover{
 		background: linear-gradient( -60deg, #417a9b 5%,#67c1f5 95%);
 		color: #fff;
 	}
@@ -1204,3 +1196,30 @@
 		opacity: 1;
 		height: 92px;
 	}
+	.game_page_background{
+		background-image: url(img/page_bg_generated_v6b.jpg);
+		background-repeat: no-repeat;
+		background-position: center top;
+		position: relative;
+	}
+	.breadcrumbs{
+		color: #56707f;
+		padding-top: 90px;
+	}
+	.breadcrumbs a{color: #8f98a0;}
+	.breadcrumbs a:hover{color: #fff;}
+	.apphub_HeaderStandardTop{
+		min-height: 46px;
+		position: relative;
+	}
+	.apphub_AppName{
+		color: #fff;
+		font-size: 26px;
+		line-height: 32px;
+	}
+	.apphub_OtherSiteInfo{
+		position: absolute;
+		top: 0;
+		right: 0;
+	}
+	.apphub_OtherSiteInfo a{display: inline-block;}
