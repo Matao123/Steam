@@ -1246,6 +1246,7 @@
 		height: 100%;
 	}
 	.highlight_player_area a{display: block;}
+	.highlight_player_area video{width: 100%;}
 	.highlight_strip{
 		margin: 4px 0;
 		position: relative;
@@ -1519,5 +1520,19 @@
 		font-size: 25px;
 		padding: 0 6px;
 		border-right: 1px solid #626366;
+		vertical-align: top;
+	}
+	.game_purchase_discount{
+		height: 32px;
+		display: inline-block;
+		margin-left: 2px;
+		vertical-align: top;
+	}
+	.discount_final_price{
+		font-size: 14px;
+		text-align: right;
+	}
+	.your_price_label{
+		font-size: 10px;
 	}
 

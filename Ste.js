@@ -48,13 +48,14 @@
 
 			function moveLeft(){
 				var r = adv.count - adv.m
-				var l = adv.m - 1
+				var l = adv.m 
+				console.log(l)
 				if(r = adv.count - 1){
 					$itemWrap.animate({
 						"left":-(adv.count-5) * 120 
 					},300)
 				}
-				if(l < adv.count - 4){
+				if(l < adv.count){
 					$itemWrap.animate({
 						"left":-(adv.m) * 120 
 					},50)
@@ -91,22 +92,41 @@
 			// 向左点击事件
 			$(".slider_left").click(function(){
 				adv.m--
-				// 判断当前图片位置是否为下一列显示的第一张
-				if(adv.m < adv.count - 5){
-					// 调整进度条
-					$(".handle").css({
-						left:(adv.m/5)*154
-					})
-					moveLeft()
-				}
-				// // 判断当前图片位置是否为最后一张
+				// // 判断当前图片位置是否为第一张
 				if(adv.m == -1){
 					adv.m = adv.count-1;
 					// 调整进度条
 					$(".handle").css({
 						left: $(".slider").width() - $(".handle").width()
 					})
-					moveLeft()
+					$itemWrap.animate({
+						"left":-(adv.count-5) * 120 
+					},300)
+					// moveLeft()
+				}
+
+				// 判断当前图片位置是否不在最后五张
+				if(adv.m <  adv.count - 5){
+					// 判断当前图片位置是否在前五张
+					if(adv.m < 5){
+						// 调整进度条
+						$(".handle").css({
+							left:0
+						})
+						$itemWrap.animate({
+							"left":0
+						},50)
+					}
+					else{
+						// 调整进度条
+						$(".handle").css({
+							left:(adv.m/5)*154
+						})
+						$itemWrap.animate({
+							"left":-(adv.m) * 120 
+						},50)
+						// moveLeft()
+					}
 				}
 				baibianStatus(adv.m)
 				navType()
@@ -170,6 +190,12 @@
 				}
 			})
 
+			$(".user_reviews_summary_row").mouseenter(function(){
+				$(this).find(".store_tooltip").fadeIn()
+			}).mouseleave(function(){
+				$(this).find(".store_tooltip").hide()
+			})
+
 
 			// //  自动播放
 			// var autoPlay = setInterval(function(){
@@ -187,3 +213,28 @@
 	  //   			$(".slider_right").click()
 	  //   		},3000)
 	  //   	})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+			// -----------------------------------弹出层------------------------
+
+
+			function popUp(obj1,obj2){
+
+			}
