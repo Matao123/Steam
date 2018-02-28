@@ -326,14 +326,27 @@
 		})
 
 
+
+		$(".user_reviews_summary_row").mouseenter(function(){
+			$(this).find(".store_tooltip").fadeIn()
+		}).mouseleave(function(){
+			$(this).find(".store_tooltip").hide()
+		})
+
+
+
+
+
+
+
+
+
 		// -----------------------------详情页轮播图------------------------------
 
 		for(var i = 0;i<$(".highlight_item").length;i++){
 			$(".highlight_item").eq(i).attr("index",i)
 			$(".scheme").eq(i).attr("index",i)
 		}
-
-
 
 		function navType(){
 			$(".scheme").hide()
@@ -346,7 +359,6 @@
 			x = $(this).attr("index")
 			navType()
 			$(".highlight_selector")[0].style.left = x*120 + "px"
-			console.log(x)
 		})
 		$(".slider_right").click(function(){
 			if(!surname){
@@ -396,7 +408,7 @@
 			var t3 = setInterval(function(){
 	  			var ml = parseInt($(".highlight_strip_scroll")[0].style.left);
 	  			var far = -x*120
-	  			if(x % 5 == 0 && x != 0 && x != 15){
+	  			if(x % 5 == 0 && x != 0){
 	  				$(".handle")[0].style.left = (x/5)*154 + "px"
 					isAnimationHas = true
 	        		if(ml !== far){
@@ -409,7 +421,6 @@
 	  			}
 	  			if(x == 15){
 	  				$(".highlight_strip_scroll")[0].style.left = ml + Math.floor((far-ml+120)/10) + "px"
-	  				$(".handle")[0].style.left = (x/5)*154 + "px"
 	  			}
 	  			if(x == count){
 	  				$(".highlight_strip_scroll")[0].style.left = 0
@@ -419,7 +430,7 @@
 	  				$(".scheme").eq(x).fadeIn()
 	  				$(".scheme").eq(x).addClass("focus")
 	  			}	
-			},30)
+			},40)
     	}
 
 
@@ -429,14 +440,14 @@
 
     	// ----------------------------详情页自动播放轮播图---------------------------
 
-    	// var autoPlay2 = setInterval(function(){
-    	// 	toNext()
-    	// },3000)
-    	// $(".highlight").mouseenter(function(){
-    	// 	clearInterval(autoPlay2)
-    	// })
-    	// $(".highlight").mouseleave(function(){
-    	// 	autoPlay2 = setInterval(function(){
-    	// 		toNext()
-    	// 	},3000)
-    	// })
+    	var autoPlay2 = setInterval(function(){
+    		toNext()
+    	},3000)
+    	$(".highlight").mouseenter(function(){
+    		clearInterval(autoPlay2)
+    	})
+    	$(".highlight").mouseleave(function(){
+    		autoPlay2 = setInterval(function(){
+    			toNext()
+    		},3000)
+    	})
