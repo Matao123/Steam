@@ -48,8 +48,7 @@
 
 			function moveLeft(){
 				var r = adv.count - adv.m
-				var l = adv.m 
-				console.log(l)
+				var l = adv.m
 				if(r = adv.count - 1){
 					$itemWrap.animate({
 						"left":-(adv.count-5) * 120 
@@ -101,12 +100,11 @@
 					})
 					$itemWrap.animate({
 						"left":-(adv.count-5) * 120 
-					},300)
+					},50)
 					// moveLeft()
 				}
-
 				// 判断当前图片位置是否不在最后五张
-				if(adv.m <  adv.count - 5){
+				if(adv.m < adv.count - 5){
 					// 判断当前图片位置是否在前五张
 					if(adv.m < 5){
 						// 调整进度条
@@ -115,7 +113,7 @@
 						})
 						$itemWrap.animate({
 							"left":0
-						},50)
+						},300)
 					}
 					else{
 						// 调整进度条
@@ -159,14 +157,15 @@
 
 
 			var body = document.getElementsByTagName("body")[0]
-			body.onselectstart = function(){
-				return false
-			}
+			
 			$(".handle").mousedown(function(event){
 				var x = event.clientX
 				var ml = parseInt(this.style.left)
 				var _this = this
-				var availableWidth = $(".slider").width() - $(this).width()
+				var availableWidth = $(this).parent().width() - $(this).width()
+				body.onselectstart = function(){
+					return false
+				}
 				window.onmousemove = function(event){
 					var X  = event.clientX
 					var newml = parseInt(_this.style.left)
@@ -182,6 +181,9 @@
 					var percent = Math.round(newml/availableWidth*100)/100
 					$itemWrap.css({
 						left : -(percent * ($itemWrap.width()-820))
+					})
+					$(".small_cap").css({
+						left : -(percent * ($(".small_cap").width()-655))
 					})
 				}
 				window.onmouseup = function(){
@@ -235,6 +237,37 @@
 			// -----------------------------------弹出层------------------------
 
 
-			function popUp(obj1,obj2){
+			// function popUp(obj1,obj2){
+			// 	obj1.mouseenter(function(){
 
+			// 	})
+			// }
+
+			// 此游戏的DLC
+			$(".dlc_footer_element").click(function(){
+				$(this).parent().hide()
+				$(".gameDlcBlocks").addClass("focus")
+				$(".game_purchase").show()
+			})
+
+
+			// 关于这款游戏
+			$(".game_page_autocollapse_readmore").click(function(){
+				$(".game_page_autocollapse_fade").hide()
+				$(".game_page_autocollapse").animate({
+					height : 2080
+				},300)
+			})
+
+			// 系统需求
+			for(var i = 0;i<$(".game_area_sys_req").length;i++){
+				$(".sysreq_tabs li").eq(i).attr("index",i)
+				$(".game_area_sys_req").eq(i).attr("index",i)
 			}
+			$(".sysreq_tabs li").click(function(){
+				var a = $(this).attr("index")
+				$(".sysreq_tabs li").removeClass("active")
+				$(".game_area_sys_req").removeClass("focus")
+				$(".sysreq_tabs li").eq(a).addClass("active")
+				$(".game_area_sys_req").eq(a).addClass("focus")
+			})

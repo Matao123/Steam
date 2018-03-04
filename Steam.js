@@ -243,7 +243,7 @@
 				}
 				$substanceImg.eq(b).fadeIn(300)
 			},1500)
-		}).mouseleave(function(){ 
+		}).mouseleave(function(){
 			// 弹出层隐藏 
 			$(".home_maincap").hide()
 			// 关闭计时器
