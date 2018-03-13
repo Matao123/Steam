@@ -9,14 +9,6 @@
 		}
 			
 
-		// ------------------------------轮播图逻辑---------------------------
-
-
-
-
-		// ---------------------------自动播放第一个轮播图---------------------
-
-		
 
 
   		// ---------------------------table选项卡逻辑---------------------------
@@ -172,6 +164,12 @@
 		var screenshots_nav = carousel_items.getElementsByClassName("screenshots_nav")
 		var substanceImg = carousel_items.getElementsByClassName("substanceImg")
 		var label = carousel_items.getElementsByClassName("label")
+		var released = carousel_items.getElementsByClassName("released")
+		var evaluating = carousel_items.getElementsByClassName("evaluating")
+		var evaluationNumber = carousel_items.getElementsByClassName("evaluationNumber")
+		var rebate = carousel_items.getElementsByClassName("discount_pct")
+		var costPrice = carousel_items.getElementsByClassName("discount_original_price")
+		var rulingPrice = carousel_items.getElementsByClassName("discount_final_price")
 		function callbackfn(data){
 			console.log(data)
 			for(var i in data){
@@ -184,6 +182,8 @@
 				var appName = data[i].name
 				app_name[i].innerHTML = appName
 				popupName[i].innerHTML = appName
+				var url = data[i].url
+				newschemeList[i].setAttribute("href",url)
 				var imgUrl = data[i].imgUrl
 				var leftImg = contentImg[i].getElementsByTagName("img")
 				var rightImg = screenshots_nav[i].getElementsByTagName("img")
@@ -202,7 +202,70 @@
 				popupImg[3].setAttribute("src",imgUrl[3])
 				var labelList = label[i].getElementsByTagName("span")
 				var datalabel = data[i].label
-				// console.log(datalabel)
+				for(var j = 0;j< datalabel.length;j++){
+					var span = document.createElement("span")
+					label[i].appendChild(span)
+					var spanList = label[i].getElementsByTagName("span")
+					spanList[j].innerHTML = datalabel[j]
+				}
+				var date = data[i].date
+				var arr = date.split("-")
+				released[i].innerHTML = arr[0]+"年"+arr[1]+"月"+arr[2]+"日"
+				var evaluate = data[i].evaluate
+				if(evaluate == 1){
+					evaluating[i].innerHTML = "好评如潮"
+					evaluating[i].className = "evaluating Ravereviews"
+				}
+				if(evaluate == 2){
+					evaluating[i].innerHTML = "特别好评"
+					evaluating[i].className = "evaluating Ravereviews"
+				}
+				if(evaluate == 4){
+					evaluating[i].innerHTML = "褒贬不一"
+					evaluating[i].className = "evaluating Mixed"
+				}
+				var evaluatingCount = data[i].evaluatingCount
+				var digit = String(evaluatingCount)
+				if(digit.length < 4){
+					evaluationNumber[i].innerHTML = digit
+				}
+				if(digit.length >= 4){
+					var comma = Math.ceil(digit.length/3)-1
+					for(var a = 1;a<comma+1;a++){
+						symbolLength = digit.slice(-3*a)
+					}
+					var t = digit.length - symbolLength.length
+					evaluationNumber[i].innerHTML = digit.slice(0,t) + "," + symbolLength
+				}
+				var platform = data[i].platform
+				var win = carousel_items.getElementsByClassName("platform_win")[i]
+				var mac = carousel_items.getElementsByClassName("platform_mac")[i]
+				var linux = carousel_items.getElementsByClassName("platform_linux")[i]
+				for(var b in platform){
+					if(platform[b] == "Windows"){
+						win.style.display = "inline-block"
+					}
+					if(platform[b] == "Mac OS"){
+						mac.style.display = "inline-block"
+					}
+					if(platform[b] == "Steam"){
+						linux.style.display = "inline-block"
+					}
+				}
+				var discount = data[i].discount
+				var originPrice = data[i].originPrice
+				var price = data[i].price
+				if(discount == 0){
+					rebate[i].innerHTML = ""
+					costPrice[i].innerHTML = ""
+				}
+				if(discount !== 0){
+					rebate[i].innerHTML = discount*100 +"%"
+					costPrice[i].innerHTML ="￥"+originPrice
+				}
+				rulingPrice[i].innerHTML ="￥"+price
+
+				
 			}
 			chart1.removeChild(scheme)
 			chart1.removeChild(home_maincap)
@@ -442,33 +505,33 @@
 		})
 
 		// 分装自动播放轮播图函数
-		function autoPlay(){
-			// 第一个轮播图里的大图片
-			$liList = $(".carousel_container").eq(0).find(".scheme");
-			// 枚举大图片数
-			for(var i = 0; i < $liList.length; i++){
-				// 判断图片当前位置
-				if($liList.eq(i).hasClass("focus")){
-					if(i < $liList.length - 1){
-						changeImg(i+1,$(".carousel_container").eq(0).find(".right"))
-					}
-					else{
-						changeImg(0,$(".carousel_container").eq(0).find(".right"))
-					}
-					break;
-				}
-			}
-		}
-		var auto = setInterval(function(){
-			autoPlay()
-		},3000)
-		$(".carousel_container").eq(0).mouseenter(function(){
-			clearInterval(auto)
-		}).mouseleave(function(){
-			auto = setInterval(function(){
-				autoPlay()
-			},3000)
-		})
+		// function autoPlay(){
+		// 	// 第一个轮播图里的大图片
+		// 	$liList = $(".carousel_container").eq(0).find(".scheme");
+		// 	// 枚举大图片数
+		// 	for(var i = 0; i < $liList.length; i++){
+		// 		// 判断图片当前位置
+		// 		if($liList.eq(i).hasClass("focus")){
+		// 			if(i < $liList.length - 1){
+		// 				changeImg(i+1,$(".carousel_container").eq(0).find(".right"))
+		// 			}
+		// 			else{
+		// 				changeImg(0,$(".carousel_container").eq(0).find(".right"))
+		// 			}
+		// 			break;
+		// 		}
+		// 	}
+		// }
+		// var auto = setInterval(function(){
+		// 	autoPlay()
+		// },3000)
+		// $(".carousel_container").eq(0).mouseenter(function(){
+		// 	clearInterval(auto)
+		// }).mouseleave(function(){
+		// 	auto = setInterval(function(){
+		// 		autoPlay()
+		// 	},3000)
+		// })
 		window.onload = function(){
 			var script = document.createElement("script")
 			script.setAttribute("src","http://www.qinsichina.com/steamDataAPI.php?callback=callbackfn")

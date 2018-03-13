@@ -3,7 +3,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title>欢迎来到Steam</title>
-	<link rel="stylesheet" type="text/css" href="steamjsonp.css">
+	<link rel="stylesheet" type="text/css" href="steam.css">
 </head>
 <body>
 	<div class="responsive">
@@ -207,7 +207,7 @@
 				</ul>
 				<div class="choice">
 					<h2>精选和推荐</h2>
-					<div class="carousel_container" id="chart1">				<a class="scheme" href="#">
+					<div class="carousel_container" id="chart1">				<a class="scheme" href="">
 							<ul class="contentImg">
 								<!-- <img class="firstFigure" src="img/capsule_1.jpg"> -->
 								<li class="focus"><img src="img/ss_08e4da005f5873b15a5de5b553ed45d100b28204.600x338.jpg"></li>
@@ -239,7 +239,9 @@
 									</div>
 								</div>
 								<div class="platforms">
-									<span class="platform_img"><img src="	img/icon_platform_win.png"></span>
+									<span class="platform_win"><img src="img/icon_platform_win.png"></span>
+									<span class="platform_mac"><img src="img/icon_platform_mac.png"></span>
+									<span class="platform_linux"><img src="img/icon_platform_linux.png"></span>
 								</div>
 							</div>
 							<div class="clear"></div>
@@ -247,7 +249,7 @@
 						<div class="home_maincap">
 							<div class="substance">
 								<h4>FINAL FANTASY XII THE ZODIAC AGE</h4>
-								<p>发行于：2018年2月1日</p>
+								<p>发行于：<span class="released">2018年2月1日</span></p>
 								<div class="substanceImg">
 									<img src="img/ss_08e4da005f5873b15a5de5b553ed45d100b28204.600x338.jpg">
 									<img src="img/ss_d7722abc39f2cd00e67319bf7589f524d2c3a94f.600x338.jpg">
@@ -256,14 +258,10 @@
 								</div>
 								<div class="evaluation">
 									<p>总体用户评测:</p>
-									<p><span>特别好评</span>(715篇评测)</p>
+									<p><span class="evaluating">特别好评</span>(<span class="evaluationNumber">715</span>篇评测)</p>
 								</div>
 								<div class="label">
 									<p>用户标签:</p>
-									<span>角色扮演</span>
-									<span>日系角色扮演</span>
-									<span>好评原声音乐</span>
-									<span>奇幻</span>
 								</div>
 							</div>
 						</div>
@@ -2586,6 +2584,6 @@
 		</div>
 	</div>
 	<script src="JQuery.js"></script>
-	<script src="Steamjsonp.js"></script>
+	<script src="Steam.js"></script>
 </body>
 </html>

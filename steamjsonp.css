@@ -462,7 +462,6 @@
 	.discount_original_price{
 		color: #7193a6;
 		text-decoration: line-through;
-		margin-right: 5px;
 	}
 	.discount_pct{
 		display: inline-block;
@@ -477,7 +476,7 @@
 		bottom: 10px;
 	}
 	.platforms span{
-		display: inline-block;
+		display: none;
 		width: 20px;
 		height: 20px;
 	}
@@ -487,7 +486,6 @@
 		left: -305px;
 		top: 0;
 		width: 300px;
-		height: 330px;
 		background-color: #dee6ec;
 		display: none;
 		z-index: 2;
@@ -523,14 +521,21 @@
 		line-height: 20px;
 		padding-left: 5px;
 	}
-	.evaluation span{
-		color: #66c0f4;
-		margin-right: 3px;
+	.evaluation span{margin-right: 3px;}
+	.Ravereviews{color: #66c0f4;}
+	.Mixed{color: #b9a074;}
+	.label{
+		height: 64px;
+		overflow: hidden;
 	}
 	.label span{
 		padding: 3px;
+		display: inline-block;
 		color: #fff;
 		background-color: #96a3ae;
+		margin-left: 3px;
+		margin-bottom: 2px;
+		border-radius: 3px;
 	}
 	.browse{
 		font-size: 12px;
