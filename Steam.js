@@ -162,7 +162,7 @@
       	var suo = false
       	var a = 0
       	// 鼠标移上事件
-      	$(".home_leftcol a").mouseenter(function(){
+      	$(".home_leftcol>a").mouseenter(function(){
 	  		var $aLeft = $(this).closest(".home_leftcol").children("a")
 	  		for(var i = 0;i<$aLeft.length;i++){
 	  			$aLeft.eq(i).attr("index",i)

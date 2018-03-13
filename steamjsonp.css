@@ -381,6 +381,7 @@
 		height: 353px;
 		display: none;
 	}
+	.contentImg .focus{display: block;}
 	.contentImg li img{
 		width: 616px;
 		height: 353px;

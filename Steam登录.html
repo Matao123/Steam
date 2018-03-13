@@ -163,14 +163,16 @@
 							<br>
 							<div class="login_row">
 								<p>Steam 帐户名称</p>
-								<input type="text">
+								<input type="text" id="userName">
 							</div>
-							<div class="login_row">
+							<div class="login_row mima">
 								<p>密码</p>
-								<input type="password">
+								<input type="password" id="password">
 							</div>
+							<input type="checkbox" id="landing">
+							<label for="landing">七天免登陆</label>
 							<div class="btn_ctn">
-								<button>登录</button>
+								<button id="btn">登录</button>
 							</div>
 						</div>
 						<div class="loginbox_sep"></div>
@@ -186,7 +188,7 @@
 					</div>
 				</div>
 				<br>
-				<a href="#">忘记您的密码？</a>
+				<a class="discolour" href="#">忘记您的密码？</a>
 			</div>
 			<div class="rightcol">
 				<div class="checkout_box">
@@ -205,7 +207,7 @@
 					</div>
 				</div>
 				<br>
-				<a href="#">了解更多 Steam 的相关信息</a>
+				<a class="discolour" href="#">了解更多 Steam 的相关信息</a>
 			</div>
 			<div class="clear"></div>
 		</div>
@@ -311,5 +313,41 @@
 			</div>
 		</div>
 	</div>
+	// <script src="Loser.js"></script>
+	// <script type="text/javascript">
+	// 	var btn = document.getElementById("btn")
+	// 	var landing = document.getElementById("landing")
+	// 	var userName = document.getElementById("userName")
+	// 	var password = document.getElementById("password")
+	// 	function setCookie(data,date){
+	// 		var d = new Date()
+	// 		d.setDate(d.getDate() + date)
+	// 		for(var i in data){
+	// 			document.cookie = i + "=" + data[i] + ";expires=" + d
+	// 		}
+	// 	}
+	// 	btn.onclick = function(){
+	// 		var user = userName.value
+	// 		var cryptogram = password.value
+	// 		if(user !== "" && cryptogram !== ""){
+	// 			if(landing.checked){
+	// 				setCookie({userName:user},7)
+	// 				setCookie({password:cryptogram},7)
+	// 			}
+	// 			else{
+	// 				removeCookie("userName")
+	// 				removeCookie("password")
+	// 			}
+	// 		}
+	// 	}
+	// 	if(!getCookie("userName")){
+	// 		userName.value = ""
+	// 		password.value = ""	
+	// 	}
+	// 	else{
+	// 		userName.value = getCookie("userName")
+	// 		password.value = getCookie("password")
+	// 	}
+	// </script>
 </body>
 </html>

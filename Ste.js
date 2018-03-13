@@ -157,40 +157,42 @@
 
 
 			var body = document.getElementsByTagName("body")[0]
-			
-			$(".handle").mousedown(function(event){
-				var x = event.clientX
-				var ml = parseInt(this.style.left)
-				var _this = this
-				var availableWidth = $(this).parent().width() - $(this).width()
+            $(".handle").mousedown(function(event){                 
+            	var x =	event.clientX                 
+            	var ml = parseInt(this.style.left)
+				var _this = this                 
+				var availableWidth = $(this).parent().width() - $(this).width()                
 				body.onselectstart = function(){
-					return false
-				}
-				window.onmousemove = function(event){
+					return false                 
+				}                 
+				window.onmousemove = function(event){                     
 					var X  = event.clientX
-					var newml = parseInt(_this.style.left)
+					var newml = parseInt(_this.style.left)                     
 					if(X - x + ml < 0){
-						return
+						return                     
+					}                     
+					if(X - x + ml > availableWidth){                         
+						return                     
 					}
-					if(X - x + ml > availableWidth){
-						return
-					}
-					else{
+					else{                         
 						_this.style.left = X - x + ml + "px"
-					}
+					}                     
 					var percent = Math.round(newml/availableWidth*100)/100
-					$itemWrap.css({
-						left : -(percent * ($itemWrap.width()-820))
+					$itemWrap.css({                         
+						left : -(percent * ($itemWrap.width()-820))                     
 					})
-					$(".small_cap").css({
-						left : -(percent * ($(".small_cap").width()-655))
+					$(".small_cap").css({                         
+						left : -(percent * ($(".small_cap").width()-655))     
 					})
 				}
-				window.onmouseup = function(){
+				window.onmouseup = function(){                     
 					window.onmousemove = null
-					body.onselectstart = null
+					body.onselectstart = null                 
 				}
-			})
+			})            
+
+
+
 
 			$(".user_reviews_summary_row").mouseenter(function(){
 				$(this).find(".store_tooltip").fadeIn()
