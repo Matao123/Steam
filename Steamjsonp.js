@@ -147,43 +147,44 @@
 		},1000)
 
 
-		
-	
 
-
-
-
-
-		var chart1 = document.getElementById("chart1")
-		var scheme = chart1.firstElementChild
-		var home_maincap = scheme.nextElementSibling
-		var carousel_items = chart1.getElementsByClassName("carousel_items")[0]
-		var app_name = carousel_items.getElementsByClassName("app_name")
-		var popupName = carousel_items.getElementsByTagName("h4")
-		var contentImg = carousel_items.getElementsByClassName("contentImg")
-		var screenshots_nav = carousel_items.getElementsByClassName("screenshots_nav")
-		var substanceImg = carousel_items.getElementsByClassName("substanceImg")
-		var label = carousel_items.getElementsByClassName("label")
-		var released = carousel_items.getElementsByClassName("released")
-		var evaluating = carousel_items.getElementsByClassName("evaluating")
-		var evaluationNumber = carousel_items.getElementsByClassName("evaluationNumber")
-		var rebate = carousel_items.getElementsByClassName("discount_pct")
-		var costPrice = carousel_items.getElementsByClassName("discount_original_price")
-		var rulingPrice = carousel_items.getElementsByClassName("discount_final_price")
+		var chart1 = document.getElementById("chart1")	// 第一个轮播图
+		var scheme = chart1.firstElementChild	// 大图的模板
+		var home_maincap = scheme.nextElementSibling // 弹出层的模板
+		var carousel_items = chart1.getElementsByClassName("carousel_items")[0] // 轮播图盒子
+		var app_name = carousel_items.getElementsByClassName("app_name") // 游戏名
+		var popupName = carousel_items.getElementsByTagName("h4")	// 弹出层游戏名
+		var contentImg = carousel_items.getElementsByClassName("contentImg") // 左边图片盒子
+		var screenshots_nav = carousel_items.getElementsByClassName("screenshots_nav") // 右边图片盒子
+		var substanceImg = carousel_items.getElementsByClassName("substanceImg") // 弹出层图片盒子
+		var label = carousel_items.getElementsByClassName("label") // 游戏标签
+		var released = carousel_items.getElementsByClassName("released")  // 发行时间
+		var evaluating = carousel_items.getElementsByClassName("evaluating") // 评价
+		var evaluationNumber = carousel_items.getElementsByClassName("evaluationNumber") // 评测数
+		var rebate = carousel_items.getElementsByClassName("discount_pct") // 折扣
+		var costPrice = carousel_items.getElementsByClassName("discount_original_price") // 原价
+		var rulingPrice = carousel_items.getElementsByClassName("discount_final_price") // 现价
 		function callbackfn(data){
 			console.log(data)
 			for(var i in data){
+				// 克隆大图
 				newscheme = scheme.cloneNode(true)
+				// 插入轮播图盒子
 				carousel_items.appendChild(newscheme)
+				// 克隆弹出层
 				newhome_maincap = home_maincap.cloneNode(true)
 				carousel_items.appendChild(newhome_maincap)
 				var newschemeList = carousel_items.getElementsByClassName("scheme")
+				// 第一个大图追加focus让其显示
 				newschemeList[0].className = "scheme focus"
+				// 实时更新游戏名
 				var appName = data[i].name
 				app_name[i].innerHTML = appName
 				popupName[i].innerHTML = appName
+				// 实时更新游戏链接地址
 				var url = data[i].url
 				newschemeList[i].setAttribute("href",url)
+				// 实行更新图片路径
 				var imgUrl = data[i].imgUrl
 				var leftImg = contentImg[i].getElementsByTagName("img")
 				var rightImg = screenshots_nav[i].getElementsByTagName("img")
@@ -200,6 +201,7 @@
 				popupImg[1].setAttribute("src",imgUrl[1])
 				popupImg[2].setAttribute("src",imgUrl[2])
 				popupImg[3].setAttribute("src",imgUrl[3])
+				// 实时更新游戏标签
 				var labelList = label[i].getElementsByTagName("span")
 				var datalabel = data[i].label
 				for(var j = 0;j< datalabel.length;j++){
@@ -208,9 +210,11 @@
 					var spanList = label[i].getElementsByTagName("span")
 					spanList[j].innerHTML = datalabel[j]
 				}
+				// 实时更新游戏发行时间
 				var date = data[i].date
 				var arr = date.split("-")
 				released[i].innerHTML = arr[0]+"年"+arr[1]+"月"+arr[2]+"日"
+				// 实时更新游戏评测
 				var evaluate = data[i].evaluate
 				if(evaluate == 1){
 					evaluating[i].innerHTML = "好评如潮"
@@ -224,6 +228,7 @@
 					evaluating[i].innerHTML = "褒贬不一"
 					evaluating[i].className = "evaluating Mixed"
 				}
+				// 实时更新游戏评测数
 				var evaluatingCount = data[i].evaluatingCount
 				var digit = String(evaluatingCount)
 				if(digit.length < 4){
@@ -237,6 +242,7 @@
 					var t = digit.length - symbolLength.length
 					evaluationNumber[i].innerHTML = digit.slice(0,t) + "," + symbolLength
 				}
+				// 实时更新右边的平台图片
 				var platform = data[i].platform
 				var win = carousel_items.getElementsByClassName("platform_win")[i]
 				var mac = carousel_items.getElementsByClassName("platform_mac")[i]
@@ -252,6 +258,7 @@
 						linux.style.display = "inline-block"
 					}
 				}
+				// 实时更新游戏折扣、原价和现价
 				var discount = data[i].discount
 				var originPrice = data[i].originPrice
 				var price = data[i].price
