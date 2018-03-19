@@ -174,7 +174,9 @@
 				// 克隆弹出层
 				newhome_maincap = home_maincap.cloneNode(true)
 				carousel_items.appendChild(newhome_maincap)
-				var newschemeList = carousel_items.getElementsByClassName("scheme")
+				newschemeList = carousel_items.getElementsByClassName("scheme")
+				var gameId = data[i].gameId
+				newschemeList[i].setAttribute("gameId",gameId)
 				// 第一个大图追加focus让其显示
 				newschemeList[0].className = "scheme focus"
 				// 实时更新游戏名
@@ -183,7 +185,7 @@
 				popupName[i].innerHTML = appName
 				// 实时更新游戏链接地址
 				var url = data[i].url
-				newschemeList[i].setAttribute("href",url)
+				newschemeList[i].setAttribute("href","javascript:void(0)")
 				// 实行更新图片路径
 				var imgUrl = data[i].imgUrl
 				var leftImg = contentImg[i].getElementsByTagName("img")
@@ -202,7 +204,6 @@
 				popupImg[2].setAttribute("src",imgUrl[2])
 				popupImg[3].setAttribute("src",imgUrl[3])
 				// 实时更新游戏标签
-				var labelList = label[i].getElementsByTagName("span")
 				var datalabel = data[i].label
 				for(var j = 0;j< datalabel.length;j++){
 					var span = document.createElement("span")
@@ -236,11 +237,15 @@
 				}
 				if(digit.length >= 4){
 					var comma = Math.ceil(digit.length/3)-1
+					var b = ""
 					for(var a = 1;a<comma+1;a++){
-						symbolLength = digit.slice(-3*a)
+						symbolLength = digit.slice(-3)
+						digit = digit.slice(0,digit.length-3)
+						b = "," + symbolLength + b 
 					}
-					var t = digit.length - symbolLength.length
-					evaluationNumber[i].innerHTML = digit.slice(0,t) + "," + symbolLength
+					digit = String(evaluatingCount)
+					var t = digit.length - symbolLength.length*comma
+					evaluationNumber[i].innerHTML = digit.slice(0,t) + b
 				}
 				// 实时更新右边的平台图片
 				var platform = data[i].platform
@@ -374,7 +379,7 @@
 				$substanceImg.eq(b).fadeIn(300)
 			})
 
-	// ----------------------轮播图点右边左边对应显示-------------------------
+			// ----------------------轮播图点右边左边对应显示-------------------------
 			var $contentImg = $(".contentImg").find("li")    // 左边的图片
 			var $screenImg = $(".screenshots").find("img")   // 右边的图片左边显示的第一张
 			var m = 0
@@ -395,6 +400,100 @@
 				$contentImg.eq(m).hide()
 				$(".contentImg").find(".focus").show()
 			})
+
+
+
+
+
+			var newstr = ""
+			$("#chart1 .scheme").attr("lock","")
+			$("#chart1 .scheme").click(function(){
+				if($("head").find("script").length == 2){
+					script1.remove()
+				}
+				script1 = $("<script></script>")
+				//插入到页面里
+				script1.appendTo($("head"))
+				var gameId = $(this).attr("gameId")
+
+				url = $(this).attr("href")
+
+				gameName = $(this).find(".app_name").html()
+
+				if(!$(this).attr("lock")){
+					$(this).attr("lock","1")
+					newstr = newstr + gameId + ","
+
+					script1.attr("src","http://192.168.1.100:81?callback=callbackId&gameId="+newstr)
+				}
+                                                                                                                                             
+                                                                                                                                                                                     
+				function setCookie(data,date){
+					var d = new Date()
+					d.setDate(d.getDate()+date)
+					for(var i in data){
+						document.cookie = i + "=" + data[i] + ";expires=" + d
+					}
+				}
+				setCookie({gamename:gameName},500)
+				setCookie({Url:url},500)
+
+			})
+			/*removeCookie("gamename")
+			removeCookie("Url")*/
+
+			// function getCookie(parameter){
+			// 	//1.获取到要找的属性在字符串中的起始位startIndex
+			// 	//2.获取到要找的属性所对应的属性值在字符串中的终止位置endIndex
+			// 	//3.从起始位startIndex，截取到终止位endIndex
+			// 	//4.以=为切割点，将第三步截取到的字符串切割为长度2的数组，数组下标[1]就是寻找属性对应的属性值.
+			// 	//获取设置过的cookie
+			// 	var str = document.cookie
+			// 	var startIndex = str.indexOf(parameter)
+			// 	var endIndex = str.indexOf(";",startIndex)
+			// 	if(endIndex == -1){
+			// 		endIndex = str.length
+			// 	}
+			// 	var result = str.substring(startIndex,endIndex).split("=")[1]
+			// 	return result
+			// }
+			// console.log(getCookie("gamename"))
+
+			function removeCookie(attrName){
+				var d = new Date()
+				d.setDate(d.getDate() - 1)
+				document.cookie = attrName + "= ;expires=" + d
+			}
+
+
+			// if(getCookie("gamename")){
+			// 	var newa = $("<a></a>")
+			// 	newa.html(gameName)
+			// 	newa.attr("href",url)
+			// 	$(".gutter .kong").prepend(newa)
+			// }
+		}
+
+		function callbackId(d){
+			console.log(d)
+			for(var i in d){
+				var name = d[d.length-1].name
+				var url = d[d.length-1].url
+			}
+			var newa = $("<a></a>")
+			newa.html(name)
+			newa.attr("href",url)
+			$(".gutter .kong").prepend(newa)
+
+		}		
+
+
+		window.onload = function(){
+			var script = document.createElement("script")
+			script.setAttribute("src","http://192.168.1.100:81?callback=callbackfn")
+			//插入到页面里
+			document.getElementsByTagName("head")[0].appendChild(script)
+
 		}
 
 
@@ -539,13 +638,13 @@
 		// 		autoPlay()
 		// 	},3000)
 		// })
-		window.onload = function(){
-			var script = document.createElement("script")
-			script.setAttribute("src","http://www.qinsichina.com/steamDataAPI.php?callback=callbackfn")
-			//插入到页面里
-			document.getElementsByTagName("head")[0].appendChild(script)
-		}
-
+	
+		// window.onload = function(){
+		// 	var script1 = document.createElement("script")
+		// 	script1.setAttribute("src","http://192.168.1.100:81?callback2=callbackfn2&gameld=")
+		// 	//插入到页面里
+		// 	document.getElementsByTagName("head")[0].appendChild(script1)
+		// }
 
 
 

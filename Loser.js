@@ -27,7 +27,7 @@
 	}
 	// 获取节点方法
 	// 该函数期望传入一个带有字符串的（选择器 / 标签名）
-	function $(selector){
+	function $1(selector){
 		var str = selector.slice(1)
 		if(selector[0] == "."){
 			return document.getElementsByClassName(str)
@@ -134,7 +134,7 @@
 	// 设置cookie属性所对应的属性值
 	function setCookie(data,date){
 		var d = new Date()
-		d.setDate(date)
+		d.setDate(d.getDate() + date)
 		for(var i in data){
 			document.cookie = i + "=" + data[i] + ";expires=" + d
 		}
