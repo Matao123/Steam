@@ -165,7 +165,6 @@
 		var costPrice = carousel_items.getElementsByClassName("discount_original_price") // 原价
 		var rulingPrice = carousel_items.getElementsByClassName("discount_final_price") // 现价
 		function callbackfn(data){
-			console.log(data)
 			for(var i in data){
 				// 克隆大图
 				newscheme = scheme.cloneNode(true)
@@ -276,9 +275,8 @@
 					costPrice[i].innerHTML ="￥"+originPrice
 				}
 				rulingPrice[i].innerHTML ="￥"+price
-
-				
 			}
+
 			chart1.removeChild(scheme)
 			chart1.removeChild(home_maincap)
 			// 轮播图函数
@@ -403,96 +401,77 @@
 
 
 
-
-
-			var newstr = ""
-			$("#chart1 .scheme").attr("lock","")
+			
+			if(getCookie("gameId") == undefined){
+				var cookienewArr = [];
+			}
+			else{
+				var cookienewArr = getCookie("gameid").split(",")
+			}
 			$("#chart1 .scheme").click(function(){
-				if($("head").find("script").length == 2){
-					script1.remove()
+				var gameId = $(this).attr("gameid")
+				if(getCookie("gameId") == undefined){
+					var cookieArr = []
 				}
-				script1 = $("<script></script>")
-				//插入到页面里
-				script1.appendTo($("head"))
-				var gameId = $(this).attr("gameId")
-
-				url = $(this).attr("href")
-
-				gameName = $(this).find(".app_name").html()
-
-				if(!$(this).attr("lock")){
-					$(this).attr("lock","1")
-					newstr = newstr + gameId + ","
-
-					script1.attr("src","http://192.168.1.100:81?callback=callbackId&gameId="+newstr)
+				else{
+					var cookieArr = getCookie("gameid").split(",")
 				}
-                                                                                                                                             
-                                                                                                                                                                                     
-				function setCookie(data,date){
-					var d = new Date()
-					d.setDate(d.getDate()+date)
-					for(var i in data){
-						document.cookie = i + "=" + data[i] + ";expires=" + d
+				for(var i = 0;i<cookieArr.length;i++){
+					if(gameId == cookieArr[i]){
+						return;
 					}
 				}
-				setCookie({gamename:gameName},500)
-				setCookie({Url:url},500)
-
+				cookienewArr.push(gameId)
+				var d = new Date();
+				d.setDate(d.getDate() + 30)
+				document.cookie = "gameId=" + String(cookienewArr) + ";expires=" + d
 			})
-			/*removeCookie("gamename")
-			removeCookie("Url")*/
+				
 
-			// function getCookie(parameter){
-			// 	//1.获取到要找的属性在字符串中的起始位startIndex
-			// 	//2.获取到要找的属性所对应的属性值在字符串中的终止位置endIndex
-			// 	//3.从起始位startIndex，截取到终止位endIndex
-			// 	//4.以=为切割点，将第三步截取到的字符串切割为长度2的数组，数组下标[1]就是寻找属性对应的属性值.
-			// 	//获取设置过的cookie
-			// 	var str = document.cookie
-			// 	var startIndex = str.indexOf(parameter)
-			// 	var endIndex = str.indexOf(";",startIndex)
-			// 	if(endIndex == -1){
-			// 		endIndex = str.length
-			// 	}
-			// 	var result = str.substring(startIndex,endIndex).split("=")[1]
-			// 	return result
-			// }
-			// console.log(getCookie("gamename"))
+		}
 
-			function removeCookie(attrName){
-				var d = new Date()
-				d.setDate(d.getDate() - 1)
-				document.cookie = attrName + "= ;expires=" + d
+
+		function getCookie(parameter){
+			//1.获取到要找的属性在字符串中的起始位startIndex
+			//2.获取到要找的属性所对应的属性值在字符串中的终止位置endIndex
+			//3.从起始位startIndex，截取到终止位endIndex
+			//4.以=为切割点，将第三步截取到的字符串切割为长度2的数组，数组下标[1]就是寻找属性对应的属性值.
+			//获取设置过的cookie
+			var str = document.cookie
+			var startIndex = str.indexOf(parameter)
+			var endIndex = str.indexOf(";",startIndex)
+			if(endIndex == -1){
+				endIndex = str.length
 			}
-
-
-			// if(getCookie("gamename")){
-			// 	var newa = $("<a></a>")
-			// 	newa.html(gameName)
-			// 	newa.attr("href",url)
-			// 	$(".gutter .kong").prepend(newa)
-			// }
+			var result = str.substring(startIndex,endIndex).split("=")[1]
+			return result
 		}
 
 		function callbackId(d){
-			console.log(d)
 			for(var i in d){
-				var name = d[d.length-1].name
-				var url = d[d.length-1].url
+				var name = d[i].name
+				var url = d[i].url
+				var newa = $("<a></a>")
+				newa.html(name)
+				newa.attr("href",url)
+				$(".gutter .kong").prepend(newa)
 			}
-			var newa = $("<a></a>")
-			newa.html(name)
-			newa.attr("href",url)
-			$(".gutter .kong").prepend(newa)
-
+			// ($(".gutter a").length)
 		}		
 
 
 		window.onload = function(){
 			var script = document.createElement("script")
-			script.setAttribute("src","http://192.168.1.100:81?callback=callbackfn")
+			script.setAttribute("src","http://ie19852360.51mypc.cn?callback=callbackfn")
 			//插入到页面里
 			document.getElementsByTagName("head")[0].appendChild(script)
+
+			// 系列化cookie
+			var str = getCookie("gameId")
+			var script2 = document.createElement("script")
+			script2.setAttribute("src","http://ie19852360.51mypc.cn?callback=callbackId&gameId=" + str)
+			//插入到页面里
+			document.getElementsByTagName("head")[0].appendChild(script2)
 
 		}
 
@@ -639,12 +618,6 @@
 		// 	},3000)
 		// })
 	
-		// window.onload = function(){
-		// 	var script1 = document.createElement("script")
-		// 	script1.setAttribute("src","http://192.168.1.100:81?callback2=callbackfn2&gameld=")
-		// 	//插入到页面里
-		// 	document.getElementsByTagName("head")[0].appendChild(script1)
-		// }
 
 
 

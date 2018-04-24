@@ -256,7 +256,7 @@
 			// 关于这款游戏
 			$(".game_page_autocollapse_readmore").click(function(){
 				$(".game_page_autocollapse_fade").hide()
-				$(".game_page_autocollapse").animate({
+				$(".game_page_autocollapse").eq(0).animate({
 					height : 2080
 				},300)
 			})
